@@ -173,7 +173,7 @@ const setupWS = (provider) => {
       if (
         event.code === 4000 ||
         event.code === 4003 ||
-        event.code === 40004 ||
+        event.code === 4004 ||
         event.code === 4005
       ) {
         console.log("Auth failed", event.code);
