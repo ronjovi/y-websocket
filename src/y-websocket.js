@@ -168,9 +168,14 @@ const setupWS = (provider) => {
         provider.wsUnsuccessfulReconnects++;
       }
 
-      console.log(event)
+      console.log(event);
       // Do not reconnect if auth failed
-      if (event.code === 4000) {
+      if (
+        event.code === 4000 ||
+        event.code === 4003 ||
+        event.code === 40004 ||
+        event.code === 4005
+      ) {
         console.log("Auth failed", event.code);
         return;
       }
