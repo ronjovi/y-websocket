@@ -174,6 +174,7 @@ const setupWS = (provider) => {
         provider.emit("failed", [
           {
             status: "Unable to connect to server",
+            code: 4000
           },
         ]);
         return;
@@ -185,6 +186,7 @@ const setupWS = (provider) => {
         provider.emit("failed", [
           {
             status: "Resource does not exist.",
+            code: 4004
           },
         ]);
         return;
@@ -196,6 +198,7 @@ const setupWS = (provider) => {
         provider.emit("failed", [
           {
             status: "Not authorized to edit post.",
+            code: 4003
           },
         ]);
         return;
