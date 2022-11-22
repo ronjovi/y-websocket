@@ -168,15 +168,36 @@ const setupWS = (provider) => {
         provider.wsUnsuccessfulReconnects++;
       }
 
-      console.log(event);
       // Do not reconnect if auth failed
-      if (
-        event.code === 4000 ||
-        event.code === 4003 ||
-        event.code === 4004 ||
-        event.code === 4005
-      ) {
-        console.log("Auth failed", event.code);
+      if (event.code === 4000) {
+        console.log("Unable to connect to server", event.code);
+        provider.emit("failed", [
+          {
+            status: "Unable to connect to server",
+          },
+        ]);
+        return;
+      }
+
+      // Do not reconnect if auth failed
+      if (event.code === 4004) {
+        console.log("Resource does not exist.", event.code);
+        provider.emit("failed", [
+          {
+            status: "Resource does not exist.",
+          },
+        ]);
+        return;
+      }
+
+      // Do not reconnect if auth failed
+      if (event.code === 4003) {
+        console.log("Not authorized to edit post.", event.code);
+        provider.emit("failed", [
+          {
+            status: "Not authorized to edit post.",
+          },
+        ]);
         return;
       }
 
